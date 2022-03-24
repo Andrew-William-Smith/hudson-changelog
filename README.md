@@ -12,7 +12,7 @@ Hudson developers may mirror their commits from sourcehut as follows:
 $ git clone git@github.com:Andrew-William-Smith/hudson-changelog.git
 $ cd hudson-changelog
 $ ./publish.sh {path to Hudson repo}
-$ git commit -u origin master
+$ git push -u origin master
 ```
 This process should be run once per commit to `hudson/master`.  At present, mirrored commit logs are not maintained for other branches.
 
