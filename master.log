@@ -1,0 +1,268 @@
+* commit 5bc40329cbfa914c9b3d9d72ed810d509d0c5c36
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Mar 24 04:51:25 2022 -0500
+| 
+|     [syntax] Highlight "hudson tokenise" errors in red
+|     
+|     This is both a user- and development-oriented feature: trying to quickly
+|     scan a list of sexps for errors is pretty tedious.
+| 
+|  src/syntax/cmd.ml   | 5 +++++
+|  src/syntax/lexer.ml | 4 ++--
+|  2 files changed, 7 insertions(+), 2 deletions(-)
+| 
+* commit 0f073ee4361c987d1ecf70a762973378e270054a
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Mar 24 04:03:55 2022 -0500
+| 
+|     [syntax] Character literals; identifier refinements
+|     
+|     Refined the grammar for identifiers to allow apostrophes in any
+|     non-leading position and question marks at the end of identifiers to
+|     denote predicates.
+|     
+|     Also implemented the lexing of character literals in all their manifold
+|     forms: conceptually, these literals are rather simple, although they
+|     require some fairly substantial data tables.  OCaml does not support the
+|     generation of compile-time hash tables or tries, so hash tables of
+|     character names are constructed at startup.
+| 
+|  src/prelude/extensions.ml |    3 +-
+|  src/syntax/lexer.ml       |  142 ++-
+|  src/syntax/tables.ml      | 2202 +++++++++++++++++++++++++++++++++++++++++++
+|  src/syntax/tables.mli     |   15 +
+|  src/syntax/token.ml       |   10 +-
+|  syntax_demo.hsn           |   15 +
+|  6 files changed, 2362 insertions(+), 25 deletions(-)
+| 
+* commit 0826c867352ea0415daefd198d6086f35a52d45b
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed Mar 23 04:34:21 2022 -0500
+| 
+|     [syntax] Optimise byte ranges in Lexgen
+|     
+|     With only the current highly incomplete grammar, previous versions of
+|     Lexgen generated a follower table containing 21_048 terminals, causing
+|     perceptible (~0.15s) latency at startup.  As most of these terminals
+|     were the enumerated constituents of byte ranges, I made these ranges
+|     terminals in their own right, reducing the follower table to 913
+|     terminals and substantially reducing the startup latency to ~0.03s.
+| 
+|  dune                 | 10 ++++++++++
+|  src/syntax/lexgen.ml | 30 +++++++++++++++++-------------
+|  2 files changed, 27 insertions(+), 13 deletions(-)
+| 
+* commit c4c652e978455738f5b5cb357c609ba674ae0cb2
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed Mar 23 03:51:57 2022 -0500
+| 
+|     [syntax] Implemented identifier lexing
+|     
+|     Implemented the lexing of identifiers using a syntax (supported
+|     character set) derived from Swift, allowing most linguistic and symbolic
+|     Unicode codepoints to be used in Hudson identifiers while being a bit
+|     more reasonable than C++.  Identifiers are NFC-normalised and will be
+|     checked for confusables while the symbol table is being constructed.
+| 
+|  src/prelude/extensions.ml |  2 +-
+|  src/syntax/lexer.ml       | 54 +++++++++++++++++++++++++++++++++++++++++----
+|  src/syntax/lexgen.ml      | 10 +++++++++
+|  src/syntax/lexgen_intf.ml |  2 ++
+|  src/syntax/token.ml       |  2 ++
+|  syntax_demo.hsn           | 10 +++++++++
+|  6 files changed, 75 insertions(+), 5 deletions(-)
+| 
+* commit 15dd28328a0d0bd6a8dac11db80607d08fe8b78a
+| Author: awsmith <aws@awsmith.us>
+| Date:   Tue Mar 22 20:30:15 2022 -0500
+| 
+|     [syntax] Remove redundant Integer token information; add Decimal token
+|     
+|     Removed fields (base, literal_value) from Integer tokens that can be
+|     easily derived from the source span yielded from the lexer.  Also added
+|     a Decimal token representing an arbitrary-precision rational value
+|     written in decimal (int.fracE+exp) format: thanks to Zarith for
+|     providing a parsing routine that already supports this format.  At the
+|     moment, I'm not planning to include hexadecimal floating-point literals
+|     since I honestly don't see any particular use for them; equivalent
+|     behaviour can be achieved by transmuting an integer to a float anyway.
+| 
+|  src/prelude/extensions.ml |  7 +++++++
+|  src/syntax/lexer.ml       | 40 +++++++++++++++++++++++++---------------
+|  src/syntax/token.ml       |  3 ++-
+|  syntax_demo.hsn           |  6 ++++++
+|  4 files changed, 40 insertions(+), 16 deletions(-)
+| 
+* commit 61e47481a1179ed39f2c1a6a5eda1ccb95738c27
+| Author: awsmith <aws@awsmith.us>
+| Date:   Tue Mar 22 02:06:42 2022 -0500
+| 
+|     [syntax] Implemented integer literal lexing
+|     
+|     Implemented the lexing of integer literals.  This infrastructure will be
+|     reused for a number of other numeric and numeric-adjacent literals, so
+|     the fairly large diff is of no particular cause for concern.  I've also
+|     added a syntax demo file for use in showing off the language to others
+|     before the parser is written: eventually similar files will be relocated
+|     to a dedicated repository (or maybe just a directory) of code samples.
+| 
+|  dune-project              |   5 +-
+|  src/prelude/dune          |  12 +++-
+|  src/prelude/extensions.ml |  36 ++++++++++-
+|  src/syntax/cmd.ml         |  11 ++--
+|  src/syntax/lexer.ml       | 144 +++++++++++++++++++++++++++++++++++---------
+|  src/syntax/lexgen.ml      |   3 +
+|  src/syntax/lexgen_intf.ml |   1 +
+|  src/syntax/token.ml       |  15 ++++-
+|  syntax_demo.hsn           |  12 ++++
+|  9 files changed, 202 insertions(+), 37 deletions(-)
+| 
+* commit 6a8b1505abdb7eefc31b1e6eae94d76391adde51
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Mar 21 09:20:31 2022 -0500
+| 
+|     [syntax] Lexer trivia patterns; token infrastructure
+|     
+|     In order to implement the "tokenise" command, I've implemented the
+|     lexing of trivia and all of the necessary infrastructure to output a
+|     token list.  The lexer generator is working remarkably well for how
+|     ad-hoc it is, requiring only some small bug fixes for edge cases.
+| 
+|  dune-project              |  3 ++-
+|  src/syntax/cmd.ml         | 13 ++++++++++
+|  src/syntax/dune           |  2 +-
+|  src/syntax/lexer.ml       | 62 +++++++++++++++++++++++++++++++++++++++++++++
+|  src/syntax/lexer.mli      | 12 +++++++++
+|  src/syntax/lexgen.ml      | 32 +++++++++++++++--------
+|  src/syntax/lexgen.mli     | 17 +++++++------
+|  src/syntax/lexgen_intf.ml |  2 ++
+|  src/syntax/token.ml       | 23 +++++++++++++++++
+|  9 files changed, 145 insertions(+), 21 deletions(-)
+| 
+* commit 53a5d1ae7d514077b659a4ea1436618022301847
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Mar 21 04:33:38 2022 -0500
+| 
+|     [prelude, syntax] Command line parsing infrastructure
+|     
+|     Added infrastructure for the processing of command line arguments using
+|     subcommands similar to cargo or opam (hudson command ...).  In general,
+|     each top-level module will contain a submodule Cmd that contains its
+|     subcommands as its only exports.
+| 
+|  dune-project                 |  5 ++++-
+|  src/dune                     |  4 +++-
+|  src/hudson.ml                | 44 +++++++++++++++++++++++++++++++++++++++++-
+|  src/prelude/dune             |  2 +-
+|  src/prelude/generic_args.ml  | 21 ++++++++++++++++++++
+|  src/prelude/generic_args.mli | 13 +++++++++++++
+|  src/prelude/prelude.ml       |  6 ++++++
+|  src/syntax/cmd.ml            | 36 ++++++++++++++++++++++++++++++++++
+|  src/syntax/cmd.mli           |  6 ++++++
+|  src/syntax/dune              |  4 +++-
+|  src/syntax/lexgen.ml         |  4 +++-
+|  src/syntax/lexgen_intf.ml    |  6 +++---
+|  12 files changed, 142 insertions(+), 9 deletions(-)
+| 
+* commit 5a5085fd06c78629b69dced85c56f2f267a6b9d4
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sun Mar 20 22:51:27 2022 -0500
+| 
+|     [syntax] Implemented lexer scanning
+|     
+|     In other words, the lexer now actually lexes.  The interface is somewhat
+|     similar to Sedlex, which itself is similar to the built-in OCaml Lexing
+|     module; however, the additional provision of user-controlled
+|     backtracking modifies the scanning algorithm somewhat.  Lexing may be
+|     performed in either `Raw or `Utf8 mode, allowing for characters to be
+|     counted in either source encoding regardless of the input format of the
+|     automaton.
+| 
+|  src/syntax/lexgen.ml      | 118 ++++++++++++++++++++++++++++++++++++++++++--
+|  src/syntax/lexgen.mli     |  34 +++++++++++++
+|  src/syntax/lexgen_intf.ml |  30 ++++++++++-
+|  3 files changed, 175 insertions(+), 7 deletions(-)
+| 
+* commit c3bd82c799bcdaab16ae96e65832369c0a4c1405
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sun Mar 20 01:37:46 2022 -0500
+| 
+|     [syntax] Implemented lexer DFA generation, minimisation
+|     
+|     Implemented the second portion of the regex -> DFA compilation
+|     algorithm, which converts a table of follower terminals into a tabular
+|     DFA.  The DFA is, roughly, an abstract machine consisting of three
+|     instructions (states): Match, which consumes a single character; Accept,
+|     which executes an action following the lexing of an entire token; and
+|     Reject, which indicates an error terminates lexing.  The generated DFA
+|     is guaranteed to be minimal and contain no duplicate states.
+| 
+|  src/syntax/lexgen.ml | 147 +++++++++++++++++++++++++++++++++++++------------
+|  1 file changed, 113 insertions(+), 34 deletions(-)
+| 
+* commit d1309842234853e36d8bd5bee19683d013538005
+| Author: awsmith <aws@awsmith.us>
+| Date:   Tue Mar 15 00:22:08 2022 -0500
+| 
+|     [syntax] Generate ByteRange patterns spanning UTF-8 lengths
+|     
+|     ByteRange will now result in patterns that properly span multiple UTF-8
+|     byte lengths and properly generates patterns on length boundaries.
+|     Currently, surrogate codepoint elimination is not supported, nor do I
+|     plan to add support for it.
+| 
+|  src/syntax/lexgen.ml | 82 ++++++++++++++++++++++++++++++++------------------
+|  1 file changed, 53 insertions(+), 29 deletions(-)
+| 
+* commit 16a8e121f51b98c44bea8fb5544d685e55c1c86c
+| Author: awsmith <aws@awsmith.us>
+| Date:   Fri Mar 11 06:30:35 2022 -0600
+| 
+|     [syntax] Implemented ByteRange, Range Lexgen patterns
+|     
+|     Implemented lexer generator patterns for ranges of bytes and Unicode
+|     codepoints.  Bytes were no issue whatsoever, but codepoint ranges were
+|     quite horrifying to implement.  Existing implementations of codepoint
+|     range automaton generation either a) constructed a full DFA, which is
+|     severely overkill given that *we are about to build one anyway*; or b)
+|     were horrifically inelegant or relied heavily upon imperative
+|     programming constructs.  To my knowledge, this is the only functional
+|     implementation of this algorithm to date, although I offer my sincere
+|     condolences to anyone who was charged with this task regardless of their
+|     chosen paradigm.
+| 
+|  src/prelude/extensions.ml |  29 +++++++++++
+|  src/prelude/prelude.ml    |  16 +++++-
+|  src/syntax/lexgen.ml      | 119 ++++++++++++++++++++++++++++++++++++++++++--
+|  src/syntax/lexgen_intf.ml |   2 +
+|  4 files changed, 162 insertions(+), 4 deletions(-)
+| 
+* commit 22980dc69baeea1a24ee264b0a70a0464d93d8e1
+  Author: awsmith <aws@awsmith.us>
+  Date:   Tue Mar 8 06:10:38 2022 -0600
+  
+      [prelude, syntax] Follower construction for lexgen
+      
+      Implemented the construction of follower tables (Φ) in the lexer
+      generator, roughly following the algorithm defined in Aho–Sethi–Ullman
+      to construct a lexer DFA directly from a regular expression without an
+      intermediary NFA.
+      
+      Also, this is the first commit in this repository, standard new-project
+      boilerplate included.  Welcome Hudson to the world!
+  
+   .editorconfig             |  12 ++++
+   .gitattributes            |   2 +
+   .gitignore                |   2 +
+   .ocamlformat              |   6 ++
+   LICENSE                   | 165 ++++++++++++++++++++++++++++++++++++++++++++
+   dune-project              |  17 +++++
+   src/dune                  |   6 ++
+   src/hudson.ml             |   4 ++
+   src/prelude/dune          |   6 ++
+   src/prelude/prelude.ml    |  10 +++
+   src/syntax/dune           |   6 ++
+   src/syntax/lexgen.ml      | 121 ++++++++++++++++++++++++++++++++
+   src/syntax/lexgen.mli     |  15 ++++
+   src/syntax/lexgen_intf.ml |  23 ++++++
+   14 files changed, 395 insertions(+)
