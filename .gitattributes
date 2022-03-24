@@ -1,0 +1,2 @@
+# Always use Unix-style line endings on all platforms.
+* text=auto eol=lf
