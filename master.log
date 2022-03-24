@@ -1,3 +1,25 @@
+* commit 0e658ad4b14bded30539dde051730644ade2b431
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Mar 24 17:19:15 2022 -0500
+| 
+|     [syntax] Implemented string literal lexing
+|     
+|     To the great surprise of everyone, especially me, dynamic lexer DFA
+|     compilation has now become an actually useful feature.  String literals
+|     defer to their own lexers constructed dynamically depending upon the
+|     desired terminator character, allowing for supremely quick string lexing
+|     courtesy of a slightly cursed internal state machine with very little
+|     state.  Dynamic lexer generation also allows for string escape sequences
+|     to reuse the same patterns and actions used for character literals by
+|     the top-level lexer, enabling a ridiculous amount of code reuse that I
+|     don't believe would be possible in any way otherwise.
+| 
+|  src/prelude/extensions.ml |   6 ++
+|  src/syntax/lexer.ml       | 193 +++++++++++++++++++++++++++++++++++---------
+|  src/syntax/token.ml       |   5 +-
+|  syntax_demo.hsn           |  13 +++
+|  4 files changed, 176 insertions(+), 41 deletions(-)
+| 
 * commit 5bc40329cbfa914c9b3d9d72ed810d509d0c5c36
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Mar 24 04:51:25 2022 -0500
