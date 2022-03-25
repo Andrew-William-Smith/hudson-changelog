@@ -1,3 +1,21 @@
+* commit fcfcef1816a864e230971f5ccc986f109345001a
+| Author: awsmith <aws@awsmith.us>
+| Date:   Fri Mar 25 14:58:41 2022 -0500
+| 
+|     [syntax] Allow multi-codepoint entities in strings
+|     
+|     Multi-codepoint named characters are now permitted in string literals,
+|     since there is no practical reason to restrict entities to only a single
+|     codepoint in that context.  Accordingly, I've also added a new named
+|     entity '&CRLF' so that developers can target Windows-style newlines
+|     without having to write two extra characters ('&CR &LF').
+| 
+|  src/syntax/lexer.ml  | 55 +++++++++++++++++++++-----------------
+|  src/syntax/tables.ml | 71 +++++++++++++++++++++++++-------------------------
+|  src/syntax/token.ml  |  2 +-
+|  syntax_demo.hsn      |  2 +-
+|  4 files changed, 69 insertions(+), 61 deletions(-)
+| 
 * commit 0e658ad4b14bded30539dde051730644ade2b431
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Mar 24 17:19:15 2022 -0500
