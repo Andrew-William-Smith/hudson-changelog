@@ -1,3 +1,31 @@
+* commit 35b9dad40ed43235337ddd5816d4d890acdc1da5
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sun Mar 27 18:56:26 2022 -0500
+| 
+|     [syntax] Implemented percent-delimited string literals
+|     
+|     To allow for a wider range of strings to be written without escaping, an
+|     alternate syntax of the form %(contents) is introduced, where the
+|     parentheses may be substituted by any codepoint for which the property
+|     Bidi_Mirrored is defined.  Refer to the changes to syntax_demo.hsn in
+|     this commit for more examples of how these literals may be used.  I also
+|     plan to make the syntax %ident(...) extensible in order to support
+|     custom string transformations or custom literals, but exactly what form
+|     this mechanism will take is still somewhat uncertain.
+| 
+|  dune-project                       |   1 +
+|  src/autogen/autogen.ml             |  29 ++
+|  src/autogen/bidi_mirroring.ml      |  44 +++
+|  src/autogen/data/BidiMirroring.txt | 633 +++++++++++++++++++++++++++++++++++
+|  src/autogen/dune                   |   6 +
+|  src/prelude/dune                   |   1 +
+|  src/syntax/dune                    |   8 +
+|  src/syntax/lexer.ml                |  95 ++++--
+|  src/syntax/tables.ml               |  11 +
+|  src/syntax/tables.mli              |   5 +
+|  syntax_demo.hsn                    |   7 +-
+|  11 files changed, 802 insertions(+), 38 deletions(-)
+| 
 * commit fcfcef1816a864e230971f5ccc986f109345001a
 | Author: awsmith <aws@awsmith.us>
 | Date:   Fri Mar 25 14:58:41 2022 -0500
