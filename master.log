@@ -1,3 +1,37 @@
+* commit db5b6535fc9001fdb4d7285649a8cc1832797b63
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sun Apr 3 22:02:17 2022 -0500
+| 
+|     [prelude, syntax] Reporting infrastructure
+|     
+|     Added a new module, Prelude.Reporting, to handle the display of
+|     formatted messages referencing spans of source code.  The format of
+|     these messages is mostly derived from the Flow JavaScript typechecker,
+|     which I consider to be substantially more readable than the famed ASCII
+|     art messages output by rustc.  The rendering code is reasonably
+|     complete, handling multiline source spans and overlapping spans.
+|     
+|     I've also begun to migrate some of the lexer errors to use Reporting,
+|     although I haven't finished the translation yet.  It turns out that
+|     writing helpful error messages is a) somewhat difficult, and b) quite
+|     tedious.  The burdens we bear for our users :)
+| 
+|  src/autogen/bidi_mirroring.ml   |   6 +-
+|  src/prelude/extensions.ml       |  13 ++
+|  src/prelude/prelude.ml          |  17 +-
+|  src/prelude/reporting.ml        | 329 ++++++++++++++++++++++++++++++++++++++
+|  src/prelude/reporting.mli       |  23 +++
+|  src/prelude/reporting_intf.ml   |  43 +++++
+|  src/prelude/source_location.ml  |  20 +++
+|  src/prelude/source_location.mli |  20 +++
+|  src/prelude/util.ml             |  16 ++
+|  src/syntax/lexer.ml             | 123 +++++++++-----
+|  src/syntax/lexgen.ml            |  31 ++--
+|  src/syntax/lexgen.mli           |   5 +
+|  src/syntax/lexgen_intf.ml       |   4 +-
+|  src/syntax/token.ml             |  10 +-
+|  14 files changed, 587 insertions(+), 73 deletions(-)
+| 
 * commit 35b9dad40ed43235337ddd5816d4d890acdc1da5
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sun Mar 27 18:56:26 2022 -0500
