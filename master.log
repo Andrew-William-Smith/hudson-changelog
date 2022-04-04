@@ -1,3 +1,18 @@
+* commit c837ff4527ddb90e774ef7f74f36ce66c192ba6a
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Apr 4 04:03:30 2022 -0500
+| 
+|     [prelude] Parameterise context lines in Reporting
+|     
+|     Parameterised the number of lines of context to print in reports, in
+|     anticipation of potentially making this value configurable in the
+|     future.  At any rate, this modification also allowed me to discover a
+|     bug in the file-rendering code that could result in a buffer overrun,
+|     which is also fixed in this commit.
+| 
+|  src/prelude/reporting.ml | 18 +++++++++++++-----
+|  1 file changed, 13 insertions(+), 5 deletions(-)
+| 
 * commit db5b6535fc9001fdb4d7285649a8cc1832797b63
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sun Apr 3 22:02:17 2022 -0500
