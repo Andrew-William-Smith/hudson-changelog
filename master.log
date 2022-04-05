@@ -1,3 +1,17 @@
+* commit ca979194304afbbd70df9ccfc062df9c78669379
+| Author: awsmith <aws@awsmith.us>
+| Date:   Tue Apr 5 12:20:37 2022 -0500
+| 
+|     [syntax] Implemented raw strings in lexer
+|     
+|     Added raw strings to the lexer, which have a syntax similar to regular
+|     strings with an 'r' inserted before the starting delimiter and ignore
+|     all escape sequences within their contents.
+| 
+|  src/syntax/lexer.ml | 94 ++++++++++++++++++++++++++++++++-------------------
+|  syntax_demo.hsn     |  2 ++
+|  2 files changed, 62 insertions(+), 34 deletions(-)
+| 
 * commit 6b32961a2fb88b2e4cbecfc042be79a08e4f8cbb
 | Author: awsmith <aws@awsmith.us>
 | Date:   Tue Apr 5 02:29:55 2022 -0500
