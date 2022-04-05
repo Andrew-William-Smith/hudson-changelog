@@ -1,3 +1,22 @@
+* commit 6b32961a2fb88b2e4cbecfc042be79a08e4f8cbb
+| Author: awsmith <aws@awsmith.us>
+| Date:   Tue Apr 5 02:29:55 2022 -0500
+| 
+|     [syntax] Added reports for all lexer errors
+|     
+|     Added formatted reports for all of the remaining lexer errors; in the
+|     process of formatting `Invalid_digit, I also discovered and fixed
+|     another bug in the report formatting.
+|     
+|     Also, ich spreche kein Deutsch.
+| 
+|  src/prelude/reporting.ml      |  3 +-
+|  src/prelude/reporting_intf.ml |  2 +-
+|  src/syntax/lexer.ml           | 64 +++++++++++++++++++++++++++++++++++++----
+|  src/syntax/token.ml           |  2 +-
+|  syntax_demo.hsn               |  2 +-
+|  5 files changed, 63 insertions(+), 10 deletions(-)
+| 
 * commit c837ff4527ddb90e774ef7f74f36ce66c192ba6a
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon Apr 4 04:03:30 2022 -0500
