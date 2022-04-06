@@ -1,3 +1,22 @@
+* commit e3de2b5deccda29b76ded8dbff947ec0f7e2ed8e
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed Apr 6 02:28:51 2022 -0500
+| 
+|     [syntax] Implemented byte strings in lexer
+|     
+|     Implemented the lexing of byte strings, which only allow single-byte
+|     characters in their contents and will be encoded as a different type in
+|     Hudson.  I've also refactored the string syntax definitions slightly,
+|     removing the separate rules for raw strings to allow them to be combined
+|     with byte strings.
+| 
+|  src/prelude/reporting.ml      |  5 ++-
+|  src/prelude/reporting_intf.ml |  1 +
+|  src/syntax/lexer.ml           | 92 ++++++++++++++++++++++++++---------------
+|  src/syntax/token.ml           |  2 +
+|  syntax_demo.hsn               |  4 ++
+|  5 files changed, 69 insertions(+), 35 deletions(-)
+| 
 * commit ca979194304afbbd70df9ccfc062df9c78669379
 | Author: awsmith <aws@awsmith.us>
 | Date:   Tue Apr 5 12:20:37 2022 -0500
