@@ -1,3 +1,21 @@
+* commit 431d98d712f3f3b01cc86d0d3fb6cbba78c0eec7
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed Apr 6 16:42:40 2022 -0500
+| 
+|     [test] Added tests for lexer, sans String-like tokens
+|     
+|     Added a test suite for the lexer, save for the tokens String,
+|     ByteString, and Identifier.  The tests may be run with "dune test": at
+|     the moment, all of them are expected to pass.
+| 
+|  dune-project        |   3 +-
+|  src/syntax/dune     |   2 +-
+|  src/syntax/token.ml |   4 +-
+|  test/dune           |   6 +++
+|  test/test.ml        |   4 ++
+|  test/test_lexer.ml  | 133 ++++++++++++++++++++++++++++++++++++++++++++++++++
+|  6 files changed, 148 insertions(+), 4 deletions(-)
+| 
 * commit e3de2b5deccda29b76ded8dbff947ec0f7e2ed8e
 | Author: awsmith <aws@awsmith.us>
 | Date:   Wed Apr 6 02:28:51 2022 -0500
