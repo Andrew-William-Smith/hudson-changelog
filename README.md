@@ -1,5 +1,7 @@
 # Hudson Development Changelog
 
+[![builds.sr.ht status](https://builds.sr.ht/~awsmith/hudson.svg)](https://builds.sr.ht/~awsmith/hudson?)
+
 In protest of GitHub's abuse of platform privilege in automatically indexing (L)GPL-licensed repositories for the creation of a training dataset for [GitHub Copilot](https://copilot.github.com/), development of the Hudson programming language is not conducted on GitHub.
 However, many programmers use this platform as a form of newsfeed for the projects that they follow, using their GitHub homepage to keep up with the developments of development without conducting code reviews.
 As such, the Hudson project mirrors a [commit log](https://github.com/Andrew-William-Smith/hudson-changelog/blob/master/master.log) to this repository, allowing for the browsing of all commits on the project's `master` branch without making any actual code available to GitHub.

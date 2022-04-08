@@ -1,3 +1,17 @@
+* commit 33480351f0eb9eb19685da1564527d8e52d9ee4a
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Apr 7 20:52:07 2022 -0500
+| 
+|     [meta] Add builds.sr.ht configuration
+|     
+|     Added a configuration to run the test suite and check formatting on
+|     every push to git.sr.ht.  We're only testing on Arch Linux for now:
+|     should support for additional platforms become necessary in the future,
+|     e.g. for codegen on BSD, I'll add configurations for those as well.
+| 
+|  .builds/archlinux.yml | 39 +++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 39 insertions(+)
+| 
 * commit 45675905b20f452036fb9ef990dad722298dd735
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Apr 7 20:16:24 2022 -0500
