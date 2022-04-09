@@ -1,3 +1,21 @@
+* commit 2e1290413efef301dac544a07179b538256aaeb0
+| Author: awsmith <aws@awsmith.us>
+| Date:   Fri Apr 8 19:02:30 2022 -0500
+| 
+|     [syntax] Disambiguate invalid byte and regular strings
+|     
+|     Added a new lexer error, `Invalid_byte_string, to differentiate byte
+|     strings from regular strings (`Invalid_string_escape).  This will allow
+|     the type checker to correctly perform inference regardless of the string
+|     type, a task which previously required examining the token source.
+| 
+|  src/prelude/reporting.ml      | 6 ++++--
+|  src/prelude/reporting_intf.ml | 1 +
+|  src/syntax/lexer.ml           | 7 ++++---
+|  src/syntax/token.ml           | 3 ++-
+|  test/test_lexer.ml            | 8 ++++----
+|  5 files changed, 15 insertions(+), 10 deletions(-)
+| 
 * commit 33480351f0eb9eb19685da1564527d8e52d9ee4a
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Apr 7 20:52:07 2022 -0500
