@@ -1,3 +1,24 @@
+* commit 5d010be9f49e3392b81406d4e1abc6b4018e2ee9
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sat Apr 9 03:06:01 2022 -0500
+| 
+|     [syntax] Implemented numeric strings in lexer
+|     
+|     Added numeric string syntax, which is orthogonal with arbitrary-radix
+|     integers and characters.  Unlike these other tokens, a radix prefix (or
+|     '#' for hexadecimal) is always required to avoid conflicts with
+|     unprefixed non-numeric string literals.  Furthermore, percent-prefixed
+|     forms of these literals are not provided, as the string contents will
+|     never contain the delimiter '"'.  I mostly envision these literals being
+|     useful for encoding raw data: I anticipate that mode #b (hexadecimal
+|     byte string) will be used most frequently, as it allows for hexdumps to
+|     be embedded directly into source files.
+| 
+|  src/syntax/lexer.ml | 176 +++++++++++++++++++++++++++++++++++++++-----------
+|  syntax_demo.hsn     |   3 +
+|  test/test_lexer.ml  |  13 +++-
+|  3 files changed, 153 insertions(+), 39 deletions(-)
+| 
 * commit 2e1290413efef301dac544a07179b538256aaeb0
 | Author: awsmith <aws@awsmith.us>
 | Date:   Fri Apr 8 19:02:30 2022 -0500
