@@ -1,3 +1,16 @@
+* commit 1d4c9185ebe7c553149eae5019f7a989751d44b2
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Apr 11 04:25:32 2022 -0500
+| 
+|     [syntax] Simplify autogen/bidi_brackets parsing
+|     
+|     This is my weekly reminder that OCaml allows pattern-matching on
+|     strings, which has allowed me to remove a Seq.filter_map call in this
+|     script's parser.
+| 
+|  src/autogen/bidi_brackets.ml | 19 ++++++-------------
+|  1 file changed, 6 insertions(+), 13 deletions(-)
+| 
 * commit 64cb6b8494292768da501dfac7ca969185bd61c5
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon Apr 11 04:17:38 2022 -0500
