@@ -1,3 +1,22 @@
+* commit 67099c57b6bfa933e2bd38c13125b091dcdb3a3c
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sat Apr 16 06:50:16 2022 -0500
+| 
+|     [syntax] Implemented extensible operators
+|     
+|     Implemented the extensible operators, whose precedences are determined
+|     by their first characters.  The symbolic operators are intended to
+|     support all mathematical infix operators that users could want to write
+|     in their programs, although their syntax may require some additional
+|     refinement due to Unicode's fairly course-grained classification of
+|     mathematical symbols.
+| 
+|  src/prelude/prelude.ml |   4 ++
+|  src/syntax/lexer.ml    | 144 +++++++++++++++++++++++++++++++++++++----------
+|  src/syntax/token.ml    |  10 ++++
+|  test/test_lexer.ml     |  67 +++++++++++++++++++++-
+|  4 files changed, 195 insertions(+), 30 deletions(-)
+| 
 * commit ca1ee8e918906febd83998a988dd4dbed43974ff
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sat Apr 16 05:58:50 2022 -0500
