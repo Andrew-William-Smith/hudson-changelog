@@ -1,3 +1,19 @@
+* commit ca1ee8e918906febd83998a988dd4dbed43974ff
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sat Apr 16 05:58:50 2022 -0500
+| 
+|     [syntax] Correct Lexgen rule precedence
+|     
+|     Previously, Lexgen only considered the case that a state had at most one
+|     fallback Accept action; however, it is possible for rules with
+|     conflicting patterns to yield multiple actions for the same string.  In
+|     this case, we now attempt to execute all of these actions until one
+|     succeeds, prioritising those that were listed earlier in the
+|     specification passed to Lexgen.make.
+| 
+|  src/syntax/lexgen.ml | 41 +++++++++++++++++++++--------------------
+|  1 file changed, 21 insertions(+), 20 deletions(-)
+| 
 * commit 1d4c9185ebe7c553149eae5019f7a989751d44b2
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon Apr 11 04:25:32 2022 -0500
