@@ -1,3 +1,17 @@
+* commit dc3fa2e366e5e15fad3c7b08ac05ee191562222c
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Apr 18 21:55:04 2022 -0500
+| 
+|     [misc] Remove syntax_demo.hsn
+|     
+|     Now that we have a proper test suite, there is really no need for this
+|     file.  Eventually, full programs will return to this repository in the
+|     form of integration tests and the standard library; however, for now,
+|     the unit test suite is sufficient.
+| 
+|  syntax_demo.hsn | 70 -------------------------------------------------------
+|  1 file changed, 70 deletions(-)
+| 
 * commit 67099c57b6bfa933e2bd38c13125b091dcdb3a3c
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sat Apr 16 06:50:16 2022 -0500
