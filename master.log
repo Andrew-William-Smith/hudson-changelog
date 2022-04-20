@@ -1,3 +1,29 @@
+* commit 774529d6d8f562902c11941b1626ff4216a58a4b
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed Apr 20 16:40:05 2022 -0500
+| 
+|     [syntax] Add named function arguments
+|     
+|     Implemented lexing of named function arguments.  These arguments may
+|     take any of the following forms:
+|     
+|       - Standard named arguments.  These arguments take the form of a label
+|         beginning with a colon followed by the variable bound to the
+|         labelled argument.  Example: some_fn :name arg1 arg2
+|       - Punned named arguments.  These arguments allow for the argument
+|         value itself to be elided when it is a variable of the same name as
+|         the label.  Example: some_fn :name name ==> some_fn :^name
+|       - Flag arguments.  These arguments are a shorthand for named arguments
+|         of type Bool, allowing the boolean value itself to be elided when it
+|         would otherwise have been a literal.  Examples:
+|           - some_fn :name True  ==> some_fn :+name
+|           - some_fn :name False ==> some_fn :-name
+| 
+|  src/syntax/lexer.ml | 39 +++++++++++++++++++++++++++++++--------
+|  src/syntax/token.ml |  3 +++
+|  test/test_lexer.ml  | 23 +++++++++++++++++++++++
+|  3 files changed, 57 insertions(+), 8 deletions(-)
+| 
 * commit b5dcb5eefd120ae3e70c6d79b5895425a11db4f6
 | Author: awsmith <aws@awsmith.us>
 | Date:   Wed Apr 20 03:09:17 2022 -0500
