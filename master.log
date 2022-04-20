@@ -1,3 +1,21 @@
+* commit a5da5b6a8fefe651b6b10db4edda12dcfebbc2ac
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed Apr 20 18:37:45 2022 -0500
+| 
+|     [syntax] Add error reports for VCS conflicts
+|     
+|     Added error reporting for RCS/Subversion/Git-style VCS conflicts markers
+|     detected by the lexer.  These markers are classified by the portion of
+|     the conflict that they indicate so that the parser can skip over
+|     conflicting regions to avoid throwing large numbers of spurious errors.
+| 
+|  src/prelude/reporting.ml      |  1 +
+|  src/prelude/reporting_intf.ml |  3 ++-
+|  src/syntax/lexer.ml           | 44 +++++++++++++++++++++++++++++++++++++++++
+|  src/syntax/token.ml           |  8 +++++++-
+|  test/test_lexer.ml            | 12 +++++++++++
+|  5 files changed, 66 insertions(+), 2 deletions(-)
+| 
 * commit eefbaac21b45221811f8163f8ef8de4c8a72f6a6
 | Author: awsmith <aws@awsmith.us>
 | Date:   Wed Apr 20 17:11:45 2022 -0500
