@@ -1,3 +1,20 @@
+* commit b5dcb5eefd120ae3e70c6d79b5895425a11db4f6
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed Apr 20 03:09:17 2022 -0500
+| 
+|     [syntax] Added a substantial number of keywords
+|     
+|     Added a significant number of new symbolic and alphabetical keywords to
+|     the lexer following some syntax sketches.  This is almost definitely not
+|     the final version of the lexical syntax, although it's a great starting
+|     point from which syntax highlighting and a preliminary parser can be
+|     implemented.
+| 
+|  src/syntax/lexer.ml |  76 +++++++++++++++++++++++++++++++++++--
+|  src/syntax/token.ml |  52 +++++++++++++++++++++++++-
+|  test/test_lexer.ml  | 101 +++++++++++++++++++++++++++++++++++++++++++++-----
+|  3 files changed, 214 insertions(+), 15 deletions(-)
+| 
 * commit dc3fa2e366e5e15fad3c7b08ac05ee191562222c
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon Apr 18 21:55:04 2022 -0500
