@@ -1,3 +1,23 @@
+* commit 204e3248153cc305f4e1e365553dc73980825ceb
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed Apr 20 19:01:11 2022 -0500
+| 
+|     [syntax] Promote Vcs_conflict to a token
+|     
+|     Since the parser will have more context about each VCS conflict as a
+|     whole, Vcs_conflict is promoted to a token rather than being reported in
+|     the lexer.  This change will make the process of parsing them simpler,
+|     even allowing for portions of conflicts to be type-checked if desired;
+|     furthermore, the parser will be able to report a single error for the
+|     overall conflict rather than reporting each individual marker.
+| 
+|  src/prelude/reporting.ml      |  1 -
+|  src/prelude/reporting_intf.ml |  3 +--
+|  src/syntax/lexer.ml           | 34 ++++++----------------------------
+|  src/syntax/token.ml           | 15 ++++++++-------
+|  test/test_lexer.ml            | 10 +++++-----
+|  5 files changed, 20 insertions(+), 43 deletions(-)
+| 
 * commit a5da5b6a8fefe651b6b10db4edda12dcfebbc2ac
 | Author: awsmith <aws@awsmith.us>
 | Date:   Wed Apr 20 18:37:45 2022 -0500
