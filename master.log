@@ -1,3 +1,18 @@
+* commit 00ffcc62f85cda29307488e192140b7c312dfbc8
+| Author: awsmith <aws@awsmith.us>
+| Date:   Fri Apr 22 04:53:56 2022 -0500
+| 
+|     [aux, vim] Vim syntax highlighting for literals
+|     
+|     Added syntax highlighting for all literals, including support for
+|     "parsing" string escape sequences and paired delimiters.  This may be a
+|     bit of a stress test for Vim's syntax highlighting engine, although I
+|     haven't noticed any perceptible slowness on my machine.
+| 
+|  aux/hudson-vim/ftdetect/hudson.vim |   6 ++
+|  aux/hudson-vim/syntax/hudson.vim   | 151 +++++++++++++++++++++++++++++++++++
+|  2 files changed, 157 insertions(+)
+| 
 * commit b9cdd0fb22eac46de8f848e55a62ce68e235650c
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Apr 21 22:56:09 2022 -0500
