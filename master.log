@@ -1,3 +1,26 @@
+* commit b9cdd0fb22eac46de8f848e55a62ce68e235650c
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Apr 21 22:56:09 2022 -0500
+| 
+|     [syntax] Implement association of trivia with terminals
+|     
+|     Introduced a new type, Token.terminal, to represent a token along with
+|     its location and leading and trailing trivia.  This type will be
+|     preserved in the CST and other representations for error reporting,
+|     although pattern matching can be done on its .token field alone.  The
+|     rules used for associating trivia with terminals are lifted directly
+|     from Swift's lib/Syntax parser, which produces CSTs with excellent
+|     fidelity and a simple API somewhat similar to Hudson's.
+| 
+|  src/syntax/cmd.ml     |   3 +-
+|  src/syntax/lexer.ml   |  40 ++++++++--
+|  src/syntax/lexer.mli  |   6 ++
+|  src/syntax/lexgen.ml  |   9 +--
+|  src/syntax/lexgen.mli |   5 ++
+|  src/syntax/token.ml   |  62 ++++++++++-----
+|  test/test_lexer.ml    | 199 ++++++++++++++++++++++++++++++++++--------------
+|  7 files changed, 233 insertions(+), 91 deletions(-)
+| 
 * commit 204e3248153cc305f4e1e365553dc73980825ceb
 | Author: awsmith <aws@awsmith.us>
 | Date:   Wed Apr 20 19:01:11 2022 -0500
