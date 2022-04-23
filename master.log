@@ -1,3 +1,16 @@
+* commit d0d98fa2e2aae6d0d10abfaa786c05a64d99bf11
+| Author: awsmith <aws@awsmith.us>
+| Date:   Fri Apr 22 23:03:20 2022 -0500
+| 
+|     [aux, vim] Improve string escape highlighting; add identifiers
+|     
+|     Fixed the highlighting of doubled delimiters in percent-escaped strings
+|     by adding an escape rule for each delimiter.  Also added highlighting
+|     for identifier-like tokens.  Pardon the 734-character-long regex.
+| 
+|  aux/hudson-vim/syntax/hudson.vim | 56 ++++++++++++++++++++++++++++++++++----
+|  1 file changed, 51 insertions(+), 5 deletions(-)
+| 
 * commit 00ffcc62f85cda29307488e192140b7c312dfbc8
 | Author: awsmith <aws@awsmith.us>
 | Date:   Fri Apr 22 04:53:56 2022 -0500
