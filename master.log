@@ -1,3 +1,33 @@
+* commit e3a981f4bb36ffc17bbbb9f332ae140aae9696c9
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sat Apr 23 22:05:11 2022 -0500
+| 
+|     [syntax] Add keywords discard, repeat
+|     
+|     Added the following keywords to the language definition:
+|     
+|     - discard :: Similar to the OCaml function (ignore _ : unit), which
+|                  evaluates a function for its side-effects but discards the
+|                  result.  In Hudson, this is a keyword so that it can have a
+|                  higher precedence than a standard function invocation,
+|                  similar to assert.  I've also renamed it from "ignore",
+|                  since I think that "discard" is a more accurate description
+|                  of the operation that it performs.
+|     - repeat :: Used to head postcondition loops of the following form:
+|         > repeat
+|         >   body_statement ;
+|         >   body_statement
+|         > ( while | until ) condition
+|     
+|     These keywords are already supported by the Vim syntax highlighting
+|     extension, as I realised their necessity while writing test code samples
+|     therefor.
+| 
+|  src/syntax/lexer.ml | 2 ++
+|  src/syntax/token.ml | 2 ++
+|  test/test_lexer.ml  | 2 ++
+|  3 files changed, 6 insertions(+)
+| 
 * commit 55149f8b5a1f1432a20bced221edac9e2b3556d3
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sat Apr 23 22:00:32 2022 -0500
