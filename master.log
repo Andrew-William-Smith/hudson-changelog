@@ -1,3 +1,18 @@
+* commit 55149f8b5a1f1432a20bced221edac9e2b3556d3
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sat Apr 23 22:00:32 2022 -0500
+| 
+|     [aux, vim] Implement syntax highlighting for complex statements
+|     
+|     Added syntax highlighting definitions for statements that take blocks of
+|     code or require sequences of keywords.  The definitions are inspired by
+|     those used for Lua and Ruby in the default Vim distribution: as such,
+|     all keywords that comprise a structure will be highlighted in the same
+|     colour, allowing for missing "end"s to be discovered visually.
+| 
+|  aux/hudson-vim/syntax/hudson.vim | 149 ++++++++++++++++++++++++++++++++++++-
+|  1 file changed, 145 insertions(+), 4 deletions(-)
+| 
 * commit d0d98fa2e2aae6d0d10abfaa786c05a64d99bf11
 | Author: awsmith <aws@awsmith.us>
 | Date:   Fri Apr 22 23:03:20 2022 -0500
