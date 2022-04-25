@@ -1,3 +1,30 @@
+* commit b0563cced2c5998783a94d16ef356d524cb95f9c
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Apr 25 11:57:55 2022 -0500
+| 
+|     [aux/vim, src] Various syntax (highlighting) changes
+|     
+|     I restructured the Vim syntax definition slightly in order to improve
+|     the highlighting of comments and added error highlighting for
+|     context-dependent keywords used outside of their proper contexts.  This
+|     modification will also allow spurious "end"s to be highlighted, which I
+|     predict will be the primary source of contextual keyword errors.
+|     
+|     I also added a new symbolic token, Tilde, to the lexer.  This token will
+|     be used to facilitate the parsing of infix function applications; it
+|     does not consume the function identifier itself since infix applications
+|     can be fully qualified.  This change causes a slight inconsistency: the
+|     operators ~mod, ~rem, and ~in will now only have their overridden
+|     precedences when used in an unqualified context.  Whether this is a
+|     feature (i.e. this is how symbolic operators already work) or a
+|     potential source of defects remains to be seen.
+| 
+|  aux/hudson-vim/syntax/hudson.vim | 58 +++++++++++++++++++++++---------------
+|  src/syntax/lexer.ml              |  1 +
+|  src/syntax/token.ml              |  1 +
+|  test/test_lexer.ml               |  5 ++++
+|  4 files changed, 43 insertions(+), 22 deletions(-)
+| 
 * commit e3a981f4bb36ffc17bbbb9f332ae140aae9696c9
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sat Apr 23 22:05:11 2022 -0500
