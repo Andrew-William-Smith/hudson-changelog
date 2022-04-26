@@ -1,3 +1,32 @@
+* commit ecc8c43ab103b084dbf867e8a94e225247e44251
+| Author: awsmith <aws@awsmith.us>
+| Date:   Tue Apr 26 18:11:09 2022 -0500
+| 
+|     [syntax] Start parser: implement parsing of literal atoms
+|     
+|     Now that the lexer is mostly finished save for potential future
+|     syntactic modifications, we now shift our focus to Hudson's parser!
+|     This commit introduces the parsing of literal atoms, along with
+|     rudimentary error recovery for error tokens that encode types.  This
+|     recovery scheme will allow for the types of these tokens to be inferred,
+|     allowing for compilation to progress substantially past the lexer when
+|     we can guess the user's intent.
+|     
+|     Furthermore, the basic structure of the parser is already apparent:
+|     individual parser functions consume a token stream and return the CST
+|     node that they parsed in addition to the unparsed remainder of the token
+|     stream.  Since CST nodes will already contain every token parsed by the
+|     lexer, we encode this stream as a list for simplicity.
+| 
+|  src/syntax/cst.ml     | 23 ++++++++++++++++++++++
+|  src/syntax/lexer.ml   |  9 +++++++++
+|  src/syntax/lexer.mli  |  8 +++++++-
+|  src/syntax/parser.ml  | 44 ++++++++++++++++++++++++++++++++++++++++++
+|  src/syntax/parser.mli |  7 +++++++
+|  test/test.ml          |  4 +++-
+|  test/test_parser.ml   | 51 +++++++++++++++++++++++++++++++++++++++++++++++++
+|  7 files changed, 144 insertions(+), 2 deletions(-)
+| 
 * commit b0563cced2c5998783a94d16ef356d524cb95f9c
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon Apr 25 11:57:55 2022 -0500
