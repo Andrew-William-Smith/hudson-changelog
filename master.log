@@ -1,3 +1,23 @@
+* commit a4eeca9b7e9d5105fe6374b94c85eda55b72ea35
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed Apr 27 13:48:10 2022 -0500
+| 
+|     [syntax] Add modules Syntax.Cst.{Lex,Syn}
+|     
+|     Added some child modules to the Cst module to allow for some additional
+|     structure in the main CST nodes.  This encapsulation will become
+|     increasingly necessary as more node types are defined, so it is
+|     beneficial to add this structure now.  Furthermore, this additional
+|     degree of separation between node types allows for the amount of mutual
+|     recursion in the CST type definitions to be reduced substantially.
+| 
+|  src/prelude/prelude.ml |  1 +
+|  src/syntax/cst.ml      | 54 +++++++++++++++++++++++++++++++++++++-----------
+|  src/syntax/parser.ml   | 18 +++++++++-------
+|  src/syntax/token.ml    |  4 ++--
+|  test/test_parser.ml    |  5 ++---
+|  5 files changed, 57 insertions(+), 25 deletions(-)
+| 
 * commit bdb3f2b8543706739ecb72f8e32bcc52beb7b60f
 | Author: awsmith <aws@awsmith.us>
 | Date:   Tue Apr 26 23:52:31 2022 -0500
