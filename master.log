@@ -1,3 +1,22 @@
+* commit bdb3f2b8543706739ecb72f8e32bcc52beb7b60f
+| Author: awsmith <aws@awsmith.us>
+| Date:   Tue Apr 26 23:52:31 2022 -0500
+| 
+|     [syntax] Restructure CST nodes
+|     
+|     Removed the common structure for CST nodes, since it will be more useful
+|     to be able to differentiate between constituent tokens than to group
+|     them together into one list.  This change may also remove a level of
+|     indirection in pattern matching CST nodes, which will substantially
+|     improve the ergonomics of other portions of the compiler.
+| 
+|  src/syntax/cst.ml    | 44 +++++++++++++++++++++++------------
+|  src/syntax/parser.ml | 53 ++++++++++++++++++++++++------------------
+|  src/syntax/token.ml  |  6 ++---
+|  test/test_lexer.ml   |  7 +-----
+|  test/test_parser.ml  | 63 +++++++++++++++++++++++++++++++++-----------------
+|  5 files changed, 106 insertions(+), 67 deletions(-)
+| 
 * commit ecc8c43ab103b084dbf867e8a94e225247e44251
 | Author: awsmith <aws@awsmith.us>
 | Date:   Tue Apr 26 18:11:09 2022 -0500
