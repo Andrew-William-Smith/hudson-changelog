@@ -1,3 +1,30 @@
+* commit 55d74768e3ba1674d6fe1a04af983ef34f55e366
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Apr 28 09:49:23 2022 -0500
+| 
+|     [prelude, syntax] Add modular structure to Cst, Sexp, Token
+|     
+|     Added an additional layer of modular structure to Cst and Token,
+|     avoiding the excessive pollution of their global namespaces by to_sexp
+|     and equal functions.  To aid in defining pretty-print functions,
+|     Prelude.Sexp now provides a functor Enhance whose results are intended
+|     to be included in modules that have to_sexp functions defined.
+|     
+|     Furthermore, I decided to keep ppx_deriving.eq as a dependency to avoid
+|     writing an excessive amount of boilerplate for equality predicates.
+| 
+|  src/prelude/extensions.ml |  71 ++++++++---
+|  src/syntax/cst.ml         |  75 +++++-------
+|  src/syntax/dune           |   2 +-
+|  src/syntax/lexer.ml       |  26 ++--
+|  src/syntax/lexer.mli      |   4 +-
+|  src/syntax/parser.ml      |  10 +-
+|  src/syntax/parser.mli     |   2 +-
+|  src/syntax/token.ml       | 293 +++++++++++++++++++++++---------------------
+|  test/test_lexer.ml        |   7 +-
+|  test/test_parser.ml       |  10 +-
+|  10 files changed, 269 insertions(+), 231 deletions(-)
+| 
 * commit ee5e1f06ecff5b8dcf3570df4c5765050da2edf9
 | Author: awsmith <aws@awsmith.us>
 | Date:   Wed Apr 27 20:23:27 2022 -0500
