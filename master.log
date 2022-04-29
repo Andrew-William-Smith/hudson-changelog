@@ -1,3 +1,13 @@
+* commit c40abc3343108210925d63e53ad3af63e6859075
+| Author: awsmith <aws@awsmith.us>
+| Date:   Fri Apr 29 11:52:18 2022 -0500
+| 
+|     [meta] Add ppx_blob dependency to build script; indentation
+| 
+|  .builds/archlinux.yml                     |  1 +
+|  test/parser_data/field_access_mixed.ptest | 12 ++++++------
+|  2 files changed, 7 insertions(+), 6 deletions(-)
+| 
 * commit 9feedb84469ea1ee4b7250db5de326e59e12767d
 | Author: awsmith <aws@awsmith.us>
 | Date:   Fri Apr 29 11:37:35 2022 -0500
