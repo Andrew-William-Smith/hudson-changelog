@@ -1,3 +1,42 @@
+* commit 9feedb84469ea1ee4b7250db5de326e59e12767d
+| Author: awsmith <aws@awsmith.us>
+| Date:   Fri Apr 29 11:37:35 2022 -0500
+| 
+|     [test] Use s-expression validation in parser tests
+|     
+|     The difficulty of writing complex nested structures in OCaml has been
+|     discouraging me from writing particularly complex parser tests.  As more
+|     complex structures and programs will have to be parsed in the near
+|     future, I have migrated the parser testing infrastructure to compare the
+|     sexp form of parsed expressions to an expected form loaded from a
+|     string.  Provided that the serialised sexps continue to preserve the CST
+|     structure with a reasonable degree of fidelity (as is currently the
+|     plan), this new test format should encourage me to write more detailed
+|     tests and allow for tests to be reused between languages in the future.
+| 
+|  dune-project                                      |  1 +
+|  test/dune                                         |  6 +-
+|  test/parser_data/atom_byte_string_literal.ptest   |  3 +
+|  test/parser_data/atom_character_literal.ptest     |  3 +
+|  test/parser_data/atom_identifier.ptest            |  3 +
+|  test/parser_data/atom_integer_literal.ptest       |  3 +
+|  test/parser_data/atom_string_literal.ptest        |  3 +
+|  test/parser_data/field_access_mixed.ptest         |  9 ++
+|  test/parser_data/field_access_record_deep.ptest   | 15 ++++
+|  test/parser_data/field_access_record_double.ptest |  4 +
+|  test/parser_data/field_access_record_single.ptest |  3 +
+|  test/parser_data/field_access_tuple_single.ptest  |  3 +
+|  .../malformed_invalid_byte_string.ptest           |  5 ++
+|  .../malformed_invalid_caret_character.ptest       |  5 ++
+|  .../parser_data/malformed_invalid_codepoint.ptest |  5 ++
+|  test/parser_data/malformed_invalid_digit.ptest    |  5 ++
+|  test/parser_data/malformed_invalid_radix.ptest    |  5 ++
+|  .../malformed_invalid_string_escape.ptest         |  5 ++
+|  .../malformed_overlong_named_character.ptest      |  5 ++
+|  .../malformed_unknown_character_name.ptest        |  5 ++
+|  test/test_parser.ml                               | 91 ++++++++-------------
+|  21 files changed, 128 insertions(+), 59 deletions(-)
+| 
 * commit 205a80869d8bd578219b074f9787a0b38b946307
 | Author: awsmith <aws@awsmith.us>
 | Date:   Fri Apr 29 09:29:43 2022 -0500
