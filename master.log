@@ -1,3 +1,28 @@
+* commit 393741994bc10307d9e194844a3b3463f95a7ea4
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sat May 7 08:13:24 2022 -0500
+| 
+|     [syntax] Implemented delimiter error correction in head position
+|     
+|     Implemented error correction for extra, missing, or mismatched
+|     delimiters at the head positions of expressions.  With this commit, test
+|     delimiter_extra_lparen is expected to fail, since it requires token
+|     deletion in the position of an infix operator rather than an expression
+|     head.
+| 
+|  src/prelude/reporting.ml                          |   7 +-
+|  src/prelude/reporting_intf.ml                     |   3 +
+|  src/syntax/cst.ml                                 |  10 +-
+|  src/syntax/lexer.ml                               |   9 +-
+|  src/syntax/parser.ml                              | 112 ++++++++++++++++++--
+|  test/parser_data/delimiter_extra_lparen.ptest     |   7 ++
+|  .../parser_data/delimiter_mismatched_lparen.ptest |   7 ++
+|  test/parser_data/delimiter_unmatched_lparen.ptest |   5 +
+|  .../delimiter_unmatched_lparen_2.ptest            |   7 ++
+|  test/parser_data/field_access_tuple_double.ptest  |   1 +
+|  test/test_parser.ml                               |  12 ++-
+|  11 files changed, 167 insertions(+), 13 deletions(-)
+| 
 * commit b37230f27922359d0f7401da308b309399413f37
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu May 5 16:21:48 2022 -0500
