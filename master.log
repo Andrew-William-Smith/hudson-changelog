@@ -1,3 +1,19 @@
+* commit c697176dd44a55b48523d10c50430f8e2cc5a97d
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sun May 15 23:25:16 2022 -0500
+| 
+|     [syntax] Added delimiter error correction in infix position
+|     
+|     Added correction for delimiter errors preceding binary operators in
+|     expressions, allowing test delimiter_extra_lparen to pass.  Delimiter
+|     errors in head-initial position, as in "x.)y", are still uncorrected
+|     since I have not yet determined how they should be handled.
+| 
+|  src/syntax/parser.ml                            | 155 +++++++++++++---------
+|  test/parser_data/delimiter_extra_lparen_2.ptest |   9 ++
+|  test/test_parser.ml                             |   3 +-
+|  3 files changed, 106 insertions(+), 61 deletions(-)
+| 
 * commit 393741994bc10307d9e194844a3b3463f95a7ea4
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sat May 7 08:13:24 2022 -0500
