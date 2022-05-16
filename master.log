@@ -1,3 +1,19 @@
+* commit 2c1a2f17deb5fa3c0744d2233e86c7026e226d09
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sun May 15 23:43:41 2022 -0500
+| 
+|     [syntax] Added closing delimiter error handling in head position
+|     
+|     Added handling of closing delimiters in head-initial position: they are
+|     always assumed to terminate their enclosing expressions in the immediate
+|     context and can be handled by higher-level parsers later on in the
+|     parsing process.
+| 
+|  src/syntax/parser.ml                            | 5 +++++
+|  test/parser_data/delimiter_extra_lparen_3.ptest | 6 ++++++
+|  test/test_parser.ml                             | 3 ++-
+|  3 files changed, 13 insertions(+), 1 deletion(-)
+| 
 * commit c697176dd44a55b48523d10c50430f8e2cc5a97d
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sun May 15 23:25:16 2022 -0500
