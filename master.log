@@ -1,3 +1,54 @@
+* commit da572bfff2b12d498755704d75dd7a2d65d50d65
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sat May 21 23:46:48 2022 -0500
+| 
+|     [syntax] Implemented infix operator precedence parsing
+|     
+|     Implemented the parsing of infix operators according to a defined
+|     precedence table.  In preparation for the addition of function call
+|     syntax, I also separated standard infix operators from field accesses:
+|     the former bind less tightly than function calls, while the latter binds
+|     more tightly.
+| 
+|  src/syntax/cst.ml                                 |  15 ++
+|  src/syntax/lexer.ml                               |   9 +-
+|  src/syntax/parser.ml                              | 190 ++++++++++++--------
+|  src/syntax/token.ml                               |   4 +
+|  test/parser_data/atom_nop_parentheses.ptest       |   3 +
+|  test/parser_data/delimiter_extra_lparen_3.ptest   |   6 -
+|  test/parser_data/field_access_complex_head.ptest  |   3 +
+|  .../field_access_missing_accessor.ptest           |   5 +
+|  .../field_access_missing_accessor_2.ptest         |   7 +
+|  test/parser_data/infix_compare.ptest              |   3 +
+|  .../infix_compare_dominates_plus.ptest            |   4 +
+|  .../infix_compare_left_associative.ptest          |   4 +
+|  test/parser_data/infix_compose.ptest              |   3 +
+|  .../infix_compose_right_associative.ptest         |   4 +
+|  test/parser_data/infix_dollar.ptest               |   3 +
+|  .../infix_dollar_dominates_symbolic.ptest         |   4 +
+|  .../infix_dollar_left_associative.ptest           |   4 +
+|  test/parser_data/infix_exponent.ptest             |   3 +
+|  .../infix_exponent_dominates_index.ptest          |   4 +
+|  test/parser_data/infix_exponent_override.ptest    |   5 +
+|  test/parser_data/infix_exponent_override_2.ptest  |   5 +
+|  .../infix_exponent_right_associative.ptest        |   4 +
+|  test/parser_data/infix_index.ptest                |   3 +
+|  .../infix_index_left_associative.ptest            |   4 +
+|  test/parser_data/infix_missing_rhs.ptest          |   5 +
+|  test/parser_data/infix_missing_rhs_2.ptest        |   6 +
+|  test/parser_data/infix_plus.ptest                 |   3 +
+|  test/parser_data/infix_plus_dominates_times.ptest |   6 +
+|  .../parser_data/infix_plus_left_associative.ptest |   4 +
+|  test/parser_data/infix_symbolic.ptest             |   3 +
+|  .../infix_symbolic_dominates_compare.ptest        |   4 +
+|  .../infix_symbolic_left_associative.ptest         |   5 +
+|  test/parser_data/infix_times.ptest                |   3 +
+|  .../infix_times_dominates_exponent.ptest          |   4 +
+|  .../infix_times_left_associative.ptest            |   5 +
+|  test/test_lexer.ml                                |   5 +-
+|  test/test_parser.ml                               |  51 +++++-
+|  37 files changed, 311 insertions(+), 92 deletions(-)
+| 
 * commit 2c1a2f17deb5fa3c0744d2233e86c7026e226d09
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sun May 15 23:43:41 2022 -0500
