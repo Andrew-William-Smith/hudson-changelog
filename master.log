@@ -1,3 +1,37 @@
+* commit be65be99ef3b707bbb9fbce234dad53f58ad20eb
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon May 23 04:10:33 2022 -0500
+| 
+|     [syntax] Implemented function call parsing
+|     
+|     Implemented the parsing of function calls, including all of their
+|     argument types with rudimentary error correction.  Hudson's function
+|     call syntax is similar to other functional languages, not requiring any
+|     delimiters between arguments: f x y.  As in OCaml, function calls bind
+|     more tightly than all infix operators.
+| 
+|  src/prelude/reporting.ml                          |  1 +
+|  src/prelude/reporting_intf.ml                     |  3 +-
+|  src/syntax/cst.ml                                 | 62 +++++++++++++++++--
+|  src/syntax/parser.ml                              | 66 ++++++++++++++++++++-
+|  test/parser_data/funcall_complex_head.ptest       |  3 +
+|  test/parser_data/funcall_complex_head_2.ptest     |  3 +
+|  test/parser_data/funcall_flag_false.ptest         |  3 +
+|  test/parser_data/funcall_flag_true.ptest          |  3 +
+|  .../parser_data/funcall_label_missing_value.ptest |  5 ++
+|  .../funcall_label_missing_value_2.ptest           |  7 +++
+|  test/parser_data/funcall_label_multiple.ptest     |  4 ++
+|  test/parser_data/funcall_label_precedence.ptest   |  3 +
+|  test/parser_data/funcall_label_single.ptest       |  3 +
+|  test/parser_data/funcall_positional_multi.ptest   |  5 ++
+|  .../funcall_positional_precedence.ptest           |  3 +
+|  .../funcall_positional_precedence_2.ptest         |  4 ++
+|  test/parser_data/funcall_positional_single.ptest  |  3 +
+|  test/parser_data/funcall_punned.ptest             |  3 +
+|  test/parser_data/infix_dominates_funcall.ptest    |  4 ++
+|  test/test_parser.ml                               | 27 +++++++++
+|  20 files changed, 206 insertions(+), 9 deletions(-)
+| 
 * commit da572bfff2b12d498755704d75dd7a2d65d50d65
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sat May 21 23:46:48 2022 -0500
