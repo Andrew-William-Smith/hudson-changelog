@@ -1,3 +1,41 @@
+* commit b6653af3a485ce7383670848914e799bd03845a4
+| Author: awsmith <aws@awsmith.us>
+| Date:   Wed May 25 01:52:41 2022 -0500
+| 
+|     [test] Add additional parser tests; final newlines
+|     
+|     Added some additional parser tests to check edge cases and ensured that
+|     all test files end with trailing newlines.  The shell command that I
+|     used to perform this modification was:
+|     
+|     $ for f in $(ls test/parser_data); do sed -i -e '$a\' $f; done
+| 
+|  test/parser_data/atom_nop_parentheses.ptest            | 2 +-
+|  test/parser_data/funcall_complex_head_2.ptest          | 2 +-
+|  test/parser_data/funcall_flag_false.ptest              | 2 +-
+|  test/parser_data/funcall_flag_true.ptest               | 2 +-
+|  test/parser_data/funcall_label_precedence.ptest        | 2 +-
+|  test/parser_data/funcall_label_single.ptest            | 2 +-
+|  test/parser_data/funcall_mixed.ptest                   | 8 ++++++++
+|  test/parser_data/funcall_positional_precedence.ptest   | 2 +-
+|  test/parser_data/funcall_positional_single.ptest       | 2 +-
+|  test/parser_data/funcall_punned.ptest                  | 2 +-
+|  test/parser_data/infix_compare.ptest                   | 2 +-
+|  test/parser_data/infix_compare_dominates_plus.ptest    | 2 +-
+|  test/parser_data/infix_compare_equal.ptest             | 4 ++++
+|  test/parser_data/infix_compare_pipe.ptest              | 4 ++++
+|  test/parser_data/infix_compose.ptest                   | 2 +-
+|  test/parser_data/infix_dollar.ptest                    | 2 +-
+|  test/parser_data/infix_dollar_dominates_symbolic.ptest | 2 +-
+|  test/parser_data/infix_exponent.ptest                  | 2 +-
+|  test/parser_data/infix_index.ptest                     | 2 +-
+|  test/parser_data/infix_plus.ptest                      | 2 +-
+|  test/parser_data/infix_symbolic.ptest                  | 2 +-
+|  test/parser_data/infix_times.ptest                     | 2 +-
+|  test/parser_data/infix_times_dominates_exponent.ptest  | 2 +-
+|  test/test_parser.ml                                    | 3 +++
+|  24 files changed, 39 insertions(+), 20 deletions(-)
+| 
 * commit be65be99ef3b707bbb9fbce234dad53f58ad20eb
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon May 23 04:10:33 2022 -0500
