@@ -1,3 +1,31 @@
+* commit de9419b49104cb160132715d8977d0aa44cc6579
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon May 30 02:52:03 2022 -0500
+| 
+|     [syntax] Reimplement parsing of function calls, infix operators
+|     
+|     Reimplemented the parsing of function calls and infix operators with the
+|     same behaviour as the previous parser, save for the aggressive delimiter
+|     correction.  In general, I am starting to think that delimiter checking
+|     should largely be restricted to when we actually see a delimiter.  This
+|     opinion is largely inspired by an examination of rustc's error
+|     correction, which is relatively conservative with regard to delimiters.
+|     It seems like any more "clever" solution could potentially result in
+|     malformed trees, while the fidelity of the syntax tree should generally
+|     be the highest priority.
+|     
+|     The tests for these reimplemented constructs have not yet been
+|     re-enabled, as the serialisation format and structure of the syntax tree
+|     have both changed.  Furthermore, I still haven't implemented delimiter
+|     correction for the above reasons.
+| 
+|  src/prelude/reporting.ml      |   9 +--
+|  src/prelude/reporting_intf.ml |   7 +-
+|  src/syntax/cst.ml             |  81 +++++++++++++++++++--
+|  src/syntax/parser.ml          | 151 ++++++++++++++++++++++++++++++++++++++--
+|  test/test_parser.ml           |   6 +-
+|  5 files changed, 229 insertions(+), 25 deletions(-)
+| 
 * commit f002fa0d533f25318aef8f3c64982acc0ad3abe9
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sun May 29 20:18:09 2022 -0500
