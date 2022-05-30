@@ -1,3 +1,45 @@
+* commit f002fa0d533f25318aef8f3c64982acc0ad3abe9
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sun May 29 20:18:09 2022 -0500
+| 
+|     [syntax] Begin parser refactor: atoms, dot accesses
+|     
+|     Started a refactor of the parser since the old implementation had a
+|     number of limitations that would present significant difficulties moving
+|     forward, viz. the immediate reporting of errors and lack of higher-order
+|     parsing primitives.  The new implementation aims to fix all of these
+|     issues, in addition to being a general code cleanup now that I have a
+|     much better idea of how I want to structure the parser as a whole.
+|     
+|     This commit also includes a small change to the behaviour of the parser:
+|     the period of a dot access does not attempt to perform error correction
+|     if it is preceded by a closing delimiter, as that correction could
+|     introduce ambiguities in complex expressions.  Any token other than a
+|     valid (or nearly valid) field will now return an error of type
+|     `Dot_missing_field.
+| 
+|  src/prelude/reporting.ml                          |   2 +-
+|  src/prelude/reporting_intf.ml                     |   2 +-
+|  src/syntax/cst.ml                                 | 187 ++-----
+|  src/syntax/parser.ml                              | 530 ++++++--------------
+|  src/syntax/parser.mli                             |   8 -
+|  test/parser_data/field_access_decimal.ptest       |   5 +
+|  .../field_access_missing_accessor.ptest           |   4 +-
+|  .../field_access_missing_accessor_2.ptest         |   8 +-
+|  test/parser_data/field_access_mixed.ptest         |   4 +-
+|  test/parser_data/field_access_tuple_double.ptest  |   8 +-
+|  test/parser_data/field_access_tuple_single.ptest  |   2 +-
+|  .../malformed_invalid_byte_string.ptest           |   2 +-
+|  .../malformed_invalid_caret_character.ptest       |   2 +-
+|  .../parser_data/malformed_invalid_codepoint.ptest |   2 +-
+|  test/parser_data/malformed_invalid_digit.ptest    |   2 +-
+|  test/parser_data/malformed_invalid_radix.ptest    |   2 +-
+|  .../malformed_invalid_string_escape.ptest         |   2 +-
+|  .../malformed_overlong_named_character.ptest      |   2 +-
+|  .../malformed_unknown_character_name.ptest        |   2 +-
+|  test/test_parser.ml                               |  30 +-
+|  20 files changed, 237 insertions(+), 569 deletions(-)
+| 
 * commit b6653af3a485ce7383670848914e799bd03845a4
 | Author: awsmith <aws@awsmith.us>
 | Date:   Wed May 25 01:52:41 2022 -0500
