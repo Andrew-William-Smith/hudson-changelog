@@ -1,3 +1,47 @@
+* commit 0057cee0360c5b7eb3d66e5e4676a636290234d8
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Jun 2 13:50:22 2022 -0500
+| 
+|     [syntax] Implemented token schema error correction
+|     
+|     Added error correction back to the parser, with some modifications to
+|     increase the mechanism's flexibility: viz. tokens may now prompt entire
+|     delimiter schemata rather than only a single token, allowing for more
+|     complex structures such as if ... then ... end to be corrected more
+|     accurately by distinguishing them from other structures that use similar
+|     tokens (e.g. elif ... then, which does not prompt its own "end").  Error
+|     correction may also now delete other extraneous tokens, defining the
+|     effective boundary of each schema start token as the span until the next
+|     closing delimiter is encountered.
+|     
+|     I also increased the lookahead distance for error correction: error
+|     correction shouldn't be invoked too frequently, so this should have a
+|     minimal impact on performance while improving accuracy.  Future
+|     profiling may reveal a more suitable token number, but for now a nice
+|     round power of 2 seems reasonable.
+| 
+|  src/prelude/reporting.ml                          |   9 +-
+|  src/prelude/reporting_intf.ml                     |   5 +-
+|  src/syntax/cst.ml                                 |  14 +-
+|  src/syntax/parser.ml                              | 250 +++++++++++++++++++-
+|  test/parser_data/atom_nop_parentheses.ptest       |   7 +-
+|  test/parser_data/delimiter_extra_lparen.ptest     |   7 -
+|  test/parser_data/delimiter_extra_lparen_2.ptest   |   9 -
+|  .../parser_data/delimiter_mismatched_lparen.ptest |   6 +-
+|  .../parser_data/delimiter_preceding_garbage.ptest |   5 +
+|  .../delimiter_preceding_garbage_2.ptest           |   5 +
+|  .../parser_data/delimiter_unmatched_garbage.ptest |   5 +
+|  test/parser_data/delimiter_unmatched_lparen.ptest |   6 +-
+|  .../delimiter_unmatched_lparen_2.ptest            |  10 +-
+|  test/parser_data/field_access_complex_head.ptest  |   5 +-
+|  test/parser_data/funcall_complex_head.ptest       |   2 +-
+|  test/parser_data/funcall_complex_head_2.ptest     |   3 +-
+|  .../funcall_positional_precedence_2.ptest         |   5 +-
+|  test/parser_data/infix_exponent_override.ptest    |  10 +-
+|  test/parser_data/infix_exponent_override_2.ptest  |  10 +-
+|  test/test_parser.ml                               |  29 +--
+|  20 files changed, 329 insertions(+), 73 deletions(-)
+| 
 * commit 3b09ca5d5c43adb195a665bdfcad181a4ec26a3a
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Jun 2 02:05:05 2022 -0500
