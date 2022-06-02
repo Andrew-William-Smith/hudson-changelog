@@ -1,3 +1,19 @@
+* commit 64f48c9f7569ce3bd1e572434e09d0a3ba4cd31a
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Jun 2 00:27:52 2022 -0500
+| 
+|     [syntax] Remove separate terminal group types
+|     
+|     Removed the type field_access_terms and rolled its members into type
+|     field_access in order to reduce the amount of typing required to access
+|     these terminals.  Additionally, the ergonomics of ignoring the field
+|     field_access_terms and the two separate terminal fields in field_access
+|     are the same, so there's no real advantage to using the separate type.
+| 
+|  src/syntax/cst.ml    | 17 ++++++++++++++---
+|  src/syntax/parser.ml | 22 +++++++++++-----------
+|  2 files changed, 25 insertions(+), 14 deletions(-)
+| 
 * commit de9419b49104cb160132715d8977d0aa44cc6579
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon May 30 02:52:03 2022 -0500
