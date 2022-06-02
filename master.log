@@ -1,3 +1,57 @@
+* commit 3b09ca5d5c43adb195a665bdfcad181a4ec26a3a
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Jun 2 02:05:05 2022 -0500
+| 
+|     [test] Convert parser tests to new CST format
+|     
+|     Migrated and re-enabled all parser tests that do not rely on delimiter
+|     parsing to match the new internal and serialisation formats of the CST.
+|     I sincerely hope that I don't have to go through this process again in
+|     the future; if I do, I'll probably write some tooling to alleviate the
+|     burden of manually migrating each test.
+| 
+|  test/parser_data/funcall_flag_false.ptest           |  2 +-
+|  test/parser_data/funcall_flag_true.ptest            |  2 +-
+|  test/parser_data/funcall_label_missing_value.ptest  |  5 ++---
+|  .../parser_data/funcall_label_missing_value_2.ptest |  9 ++++-----
+|  test/parser_data/funcall_label_multiple.ptest       |  5 +++--
+|  test/parser_data/funcall_label_precedence.ptest     |  2 +-
+|  test/parser_data/funcall_label_single.ptest         |  2 +-
+|  test/parser_data/funcall_mixed.ptest                | 13 +++++++------
+|  test/parser_data/funcall_positional_multi.ptest     |  7 ++++---
+|  .../parser_data/funcall_positional_precedence.ptest |  2 +-
+|  test/parser_data/funcall_positional_single.ptest    |  2 +-
+|  test/parser_data/funcall_punned.ptest               |  2 +-
+|  test/parser_data/infix_compare.ptest                |  2 +-
+|  test/parser_data/infix_compare_dominates_plus.ptest |  5 +++--
+|  test/parser_data/infix_compare_equal.ptest          |  2 +-
+|  .../infix_compare_left_associative.ptest            |  5 +++--
+|  test/parser_data/infix_compare_pipe.ptest           |  4 ----
+|  test/parser_data/infix_compose.ptest                |  2 +-
+|  .../infix_compose_right_associative.ptest           |  5 +++--
+|  test/parser_data/infix_dollar.ptest                 |  2 +-
+|  .../infix_dollar_dominates_symbolic.ptest           |  5 +++--
+|  .../parser_data/infix_dollar_left_associative.ptest |  5 +++--
+|  test/parser_data/infix_dominates_funcall.ptest      |  5 +++--
+|  test/parser_data/infix_exponent.ptest               |  2 +-
+|  .../infix_exponent_dominates_index.ptest            |  5 +++--
+|  .../infix_exponent_right_associative.ptest          |  5 +++--
+|  test/parser_data/infix_index.ptest                  |  2 +-
+|  test/parser_data/infix_index_left_associative.ptest |  5 +++--
+|  test/parser_data/infix_missing_rhs.ptest            |  6 +++---
+|  test/parser_data/infix_missing_rhs_2.ptest          | 11 +++++++----
+|  test/parser_data/infix_plus.ptest                   |  2 +-
+|  test/parser_data/infix_plus_dominates_times.ptest   | 15 +++++++++++----
+|  test/parser_data/infix_plus_left_associative.ptest  |  5 +++--
+|  test/parser_data/infix_symbolic.ptest               |  2 +-
+|  .../infix_symbolic_dominates_compare.ptest          |  7 ++++---
+|  .../infix_symbolic_left_associative.ptest           |  8 +++++---
+|  test/parser_data/infix_times.ptest                  |  2 +-
+|  .../infix_times_dominates_exponent.ptest            |  5 +++--
+|  test/parser_data/infix_times_left_associative.ptest |  8 +++++---
+|  test/test_parser.ml                                 | 19 +++++++++----------
+|  40 files changed, 113 insertions(+), 91 deletions(-)
+| 
 * commit 64f48c9f7569ce3bd1e572434e09d0a3ba4cd31a
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Jun 2 00:27:52 2022 -0500
