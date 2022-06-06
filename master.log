@@ -1,3 +1,26 @@
+* commit 3b4a47f13ff9708f8df5429b21e97503bd9c756e
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Jun 6 01:25:59 2022 -0500
+| 
+|     [syntax] Added boolean and (&&) and or (||) operators
+|     
+|     Added support for parsing the short-circuiting boolean AND and OR
+|     operators.  These operators have the highest precedence yet, allowing
+|     for all comparisons and uses of NOT to be used as boolean clauses
+|     without requiring parentheses.
+| 
+|  src/syntax/cst.ml                                 |  6 ++++
+|  src/syntax/parser.ml                              | 36 ++++++++++++++-------
+|  test/parser_data/infix_and.ptest                  |  3 ++
+|  test/parser_data/infix_and_dominates_dollar.ptest |  4 +++
+|  .../infix_and_dominates_prefix_not.ptest          |  4 +++
+|  test/parser_data/infix_and_left_associative.ptest |  4 +++
+|  test/parser_data/infix_or.ptest                   |  3 ++
+|  test/parser_data/infix_or_dominates_and.ptest     |  4 +++
+|  test/parser_data/infix_or_left_associative.ptest  |  4 +++
+|  test/test_parser.ml                               |  7 ++++
+|  10 files changed, 63 insertions(+), 12 deletions(-)
+| 
 * commit a31ab50825e840d3085d498f939822524282d06c
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sun Jun 5 21:33:12 2022 -0500
