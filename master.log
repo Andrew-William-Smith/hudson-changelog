@@ -1,3 +1,39 @@
+* commit a31ab50825e840d3085d498f939822524282d06c
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sun Jun 5 21:33:12 2022 -0500
+| 
+|     [syntax] Implemented prefix operator expressions
+|     
+|     Implemented the parsing of prefix operators in expressions.  These are a
+|     relatively simple extension of infix operators, having only a right
+|     binding power.  These binding powers are sequenced with the infix
+|     operators, maintaining a strict ordering to describe the precedences
+|     throughout the expression parser.
+| 
+|  src/prelude/reporting.ml                          |   7 +-
+|  src/prelude/reporting_intf.ml                     |   5 +-
+|  src/syntax/cst.ml                                 |  49 ++++++----
+|  src/syntax/parser.ml                              | 101 +++++++++++++++-----
+|  .../parser_data/delimiter_mismatched_lparen.ptest |   2 +-
+|  .../parser_data/delimiter_unmatched_garbage.ptest |   2 +-
+|  test/parser_data/delimiter_unmatched_lparen.ptest |   2 +-
+|  .../delimiter_unmatched_lparen_2.ptest            |   4 +-
+|  .../infix_dominates_prefix_minus.ptest            |   4 +
+|  .../infix_times_dominates_prefix_minus.ptest      |   5 +
+|  test/parser_data/prefix_minus.ptest               |   3 +
+|  test/parser_data/prefix_minus_2.ptest             |   3 +
+|  .../prefix_minus_dominates_funcall.ptest          |   4 +
+|  .../prefix_minus_dominates_infix_exponent.ptest   |   5 +
+|  .../prefix_minus_dominates_infix_index.ptest      |   7 ++
+|  test/parser_data/prefix_missing_rhs.ptest         |   5 +
+|  test/parser_data/prefix_missing_rhs_2.ptest       |   6 ++
+|  test/parser_data/prefix_not.ptest                 |   3 +
+|  test/parser_data/prefix_not_2.ptest               |   3 +
+|  .../prefix_not_dominates_infix_compare.ptest      |   5 +
+|  test/parser_data/prefix_plus.ptest                |   3 +
+|  test/test_parser.ml                               |  18 ++++
+|  22 files changed, 197 insertions(+), 49 deletions(-)
+| 
 * commit 0057cee0360c5b7eb3d66e5e4676a636290234d8
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Jun 2 13:50:22 2022 -0500
