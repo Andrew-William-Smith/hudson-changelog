@@ -1,3 +1,25 @@
+* commit 98bb8f7defc954466617ce76ac6cde455bc0fe96
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Jun 9 01:55:35 2022 -0500
+| 
+|     [syntax] Parse tuple literals
+|     
+|     Implemented the parsing of tuple literals, which consist of a series of
+|     expressions delimited by commas.  Unlike some other languages, Hudson
+|     tuples do not need to be surrounded by parentheses; accordingly,
+|     trailing commas are also not permitted to avoid syntactic ambiguities.
+| 
+|  src/syntax/cst.ml                               | 10 +++
+|  src/syntax/parser.ml                            | 78 ++++++++++++++---------
+|  test/parser_data/tuple_2.ptest                  |  3 +
+|  test/parser_data/tuple_3.ptest                  |  3 +
+|  test/parser_data/tuple_dominates_infix_or.ptest |  5 ++
+|  test/parser_data/tuple_missing_rhs.ptest        |  7 ++
+|  test/parser_data/tuple_nested_left.ptest        |  4 ++
+|  test/parser_data/tuple_nested_right.ptest       |  4 ++
+|  test/test_parser.ml                             | 11 +++-
+|  9 files changed, 94 insertions(+), 31 deletions(-)
+| 
 * commit 3b4a47f13ff9708f8df5429b21e97503bd9c756e
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon Jun 6 01:25:59 2022 -0500
