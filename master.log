@@ -1,3 +1,22 @@
+* commit 3ae8a13eeb486d52d467a2284861641db3f71065
+| Author: awsmith <aws@awsmith.us>
+| Date:   Fri Jun 10 05:41:43 2022 -0500
+| 
+|     [syntax] Implemented discard expression
+|     
+|     Implemented the discard expression, which effectively consists of a
+|     prefix Discard operator and evaluates an expression solely for its side
+|     effects, returning a unit value.
+| 
+|  src/syntax/cst.ml                                 |  2 +
+|  src/syntax/parser.ml                              | 65 +++++++++++++++------
+|  test/parser_data/discard.ptest                    |  4 ++
+|  test/parser_data/discard_missing_expr.ptest       |  5 ++
+|  .../field_access_missing_accessor.ptest           |  3 +-
+|  .../field_access_missing_accessor_2.ptest         |  9 ++-
+|  test/test_parser.ml                               |  7 ++-
+|  7 files changed, 70 insertions(+), 25 deletions(-)
+| 
 * commit 98bb8f7defc954466617ce76ac6cde455bc0fe96
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Jun 9 01:55:35 2022 -0500
