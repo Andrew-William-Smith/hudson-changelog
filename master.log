@@ -1,3 +1,47 @@
+* commit e782b5f4126078a972e5d6c7d8f0200e6c46459b
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Jun 13 04:36:59 2022 -0500
+| 
+|     [syntax] Add abstract parser generation (Parser_base)
+|     
+|     Added a new module to generate parsers for expression-like syntaxes
+|     given an abstract definition of the syntactic construct to parse.  While
+|     this functionality is not useful in its own right at present, being used
+|     solely to generate the Cst.expr parser, it will be supremely helpful
+|     once I add pattern and type syntaxes, which are also expression-like in
+|     form and thus can be defined using Parser_base.
+|     
+|     A further consequence of this change is a reduction in the number of
+|     mutually recursive definitions in both Cst and Parser, making future
+|     refactoring somewhat easier.
+| 
+|  src/syntax/cst.ml                                 | 155 ++--
+|  src/syntax/parser.ml                              | 796 ++++----------------
+|  src/syntax/parser.mli                             |  17 +
+|  src/syntax/parser_base.ml                         | 511 +++++++++++++
+|  .../parser_data/delimiter_mismatched_lparen.ptest |   2 +-
+|  test/parser_data/field_access_complex_head.ptest  |   6 -
+|  test/parser_data/field_access_mixed.ptest         |   9 -
+|  test/parser_data/field_access_record_deep.ptest   |  15 -
+|  test/parser_data/field_access_record_double.ptest |   4 -
+|  test/parser_data/field_access_record_single.ptest |   3 -
+|  test/parser_data/field_access_tuple_single.ptest  |   3 -
+|  .../field_projection_complex_head.ptest           |   6 +
+|  ...cimal.ptest => field_projection_decimal.ptest} |   0
+|  ...st => field_projection_missing_accessor.ptest} |   0
+|  ... => field_projection_missing_accessor_2.ptest} |   0
+|  test/parser_data/field_projection_mixed.ptest     |   9 +
+|  .../field_projection_record_deep.ptest            |  15 +
+|  .../field_projection_record_double.ptest          |   4 +
+|  .../field_projection_record_single.ptest          |   3 +
+|  ....ptest => field_projection_tuple_double.ptest} |   4 +-
+|  .../field_projection_tuple_single.ptest           |   3 +
+|  test/parser_data/funcall_complex_head.ptest       |   2 +-
+|  test/parser_data/funcall_label_precedence.ptest   |   2 +-
+|  .../funcall_positional_precedence.ptest           |   2 +-
+|  test/test_parser.ml                               |  26 +-
+|  25 files changed, 824 insertions(+), 773 deletions(-)
+| 
 * commit 3ae8a13eeb486d52d467a2284861641db3f71065
 | Author: awsmith <aws@awsmith.us>
 | Date:   Fri Jun 10 05:41:43 2022 -0500
