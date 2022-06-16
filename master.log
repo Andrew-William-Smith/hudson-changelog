@@ -1,3 +1,36 @@
+* commit 7427a53da96166451560520e8c80754d3ee63fc9
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Jun 16 11:35:43 2022 -0500
+| 
+|     [syntax] Make $ right-associative; change ** to ^
+|     
+|     Made the $ operator right-associative for isomorphism with Haskell.
+|     Also changed the ** operator to ^, allowing the caret to be used as a
+|     general tightly-binding right-associative operator, similarly to its use
+|     in OCaml.  The relevant token definitions have been modified to reflect
+|     these changes.
+| 
+|  .gitignore                                          |  1 +
+|  src/syntax/lexer.ml                                 | 12 +++++-------
+|  src/syntax/parser.ml                                |  6 +++---
+|  src/syntax/token.ml                                 |  6 ++----
+|  test/parser_data/infix_caret.ptest                  |  3 +++
+|  ...ndex.ptest => infix_caret_dominates_index.ptest} |  4 ++--
+|  ...nt_override.ptest => infix_caret_override.ptest} |  4 ++--
+|  ...verride_2.ptest => infix_caret_override_2.ptest} |  4 ++--
+|  .../parser_data/infix_caret_right_associative.ptest |  5 +++++
+|  .../parser_data/infix_dollar_left_associative.ptest |  5 -----
+|  .../infix_dollar_right_associative.ptest            |  5 +++++
+|  test/parser_data/infix_exponent.ptest               |  3 ---
+|  .../infix_exponent_right_associative.ptest          |  5 -----
+|  test/parser_data/infix_plus_dominates_times.ptest   |  4 ++--
+|  test/parser_data/infix_times_dominates_caret.ptest  |  5 +++++
+|  .../infix_times_dominates_exponent.ptest            |  5 -----
+|  ...est => prefix_minus_dominates_infix_caret.ptest} |  4 ++--
+|  test/test_lexer.ml                                  | 19 ++++---------------
+|  test/test_parser.ml                                 | 16 ++++++++--------
+|  19 files changed, 51 insertions(+), 65 deletions(-)
+| 
 * commit e782b5f4126078a972e5d6c7d8f0200e6c46459b
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon Jun 13 04:36:59 2022 -0500
