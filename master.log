@@ -1,3 +1,82 @@
+* commit 4b910a98384746b96fa26f7e3554a495e68f80b4
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sat Jun 18 13:24:46 2022 -0500
+| 
+|     [syntax] Parse tilde-prefixed infix operators
+|     
+|     Hudson's syntax now includes a feature directly inspired by, of all
+|     sources, APL: the ability to use arbitrary expressions as infix
+|     operators by prefixing them with a tilde.  In its simplest form, this
+|     construct allows for common functions to be transformed into infix
+|     operators without requiring separate definitions:
+|     
+|         min :: Int -> Int -> Int.
+|         x ~min y ~min z
+|     
+|     However, it may be used in more complex scenarios, allowing for
+|     compositions:
+|     
+|         x ~(g @ f) y
+|     
+|     And even anonymous functions to be used as infix operators:
+|     
+|         x ~{f _ + f _} y
+|     
+|     I don't expect that the latter form will see much use, although I can
+|     see some limited scenarios in which it could improve clarity somewhat.
+| 
+|  src/prelude/reporting.ml                          |  1 +
+|  src/prelude/reporting_intf.ml                     |  3 +-
+|  src/syntax/cst.ml                                 | 22 +++++++++++++--
+|  src/syntax/parser.ml                              | 10 ++++---
+|  src/syntax/parser_base.ml                         | 31 +++++++++++++++++++--
+|  .../field_projection_complex_head.ptest           |  2 +-
+|  test/parser_data/funcall_complex_head_2.ptest     |  2 +-
+|  .../funcall_positional_precedence_2.ptest         |  2 +-
+|  test/parser_data/infix_and_dominates_dollar.ptest |  4 +--
+|  test/parser_data/infix_caret.ptest                |  2 +-
+|  .../parser_data/infix_caret_dominates_index.ptest |  6 ++--
+|  test/parser_data/infix_caret_override.ptest       |  6 ++--
+|  test/parser_data/infix_caret_override_2.ptest     |  6 ++--
+|  .../infix_caret_right_associative.ptest           |  4 +--
+|  test/parser_data/infix_compare.ptest              |  2 +-
+|  .../infix_compare_dominates_plus.ptest            |  6 ++--
+|  test/parser_data/infix_compare_equal.ptest        |  2 +-
+|  .../infix_compare_left_associative.ptest          |  4 +--
+|  test/parser_data/infix_compose.ptest              |  2 +-
+|  .../infix_compose_right_associative.ptest         |  4 +--
+|  test/parser_data/infix_dollar.ptest               |  2 +-
+|  .../infix_dollar_dominates_symbolic.ptest         |  6 ++--
+|  .../infix_dollar_right_associative.ptest          |  4 +--
+|  test/parser_data/infix_dominates_funcall.ptest    |  2 +-
+|  test/parser_data/infix_index.ptest                |  2 +-
+|  .../infix_index_left_associative.ptest            |  4 +--
+|  test/parser_data/infix_missing_rhs.ptest          |  2 +-
+|  test/parser_data/infix_missing_rhs_2.ptest        |  4 +--
+|  test/parser_data/infix_plus.ptest                 |  2 +-
+|  test/parser_data/infix_plus_dominates_times.ptest | 10 +++----
+|  .../parser_data/infix_plus_left_associative.ptest |  4 +--
+|  test/parser_data/infix_prefixed.ptest             |  3 ++
+|  test/parser_data/infix_prefixed_complex.ptest     |  7 +++++
+|  .../infix_prefixed_dominates_compare.ptest        |  9 ++++++
+|  .../infix_prefixed_equals_symbolic.ptest          |  9 ++++++
+|  .../infix_prefixed_left_associative.ptest         |  7 +++++
+|  .../infix_prefixed_missing_operator.ptest         |  9 ++++++
+|  test/parser_data/infix_prefixed_missing_rhs.ptest |  7 +++++
+|  test/parser_data/infix_prefixed_projection.ptest  |  5 ++++
+|  test/parser_data/infix_symbolic.ptest             |  2 +-
+|  .../infix_symbolic_dominates_compare.ptest        |  6 ++--
+|  .../infix_symbolic_left_associative.ptest         |  6 ++--
+|  test/parser_data/infix_times.ptest                |  2 +-
+|  .../parser_data/infix_times_dominates_caret.ptest |  6 ++--
+|  .../infix_times_dominates_prefix_minus.ptest      |  2 +-
+|  .../infix_times_left_associative.ptest            |  6 ++--
+|  .../prefix_minus_dominates_infix_caret.ptest      |  2 +-
+|  .../prefix_minus_dominates_infix_index.ptest      |  4 +--
+|  .../prefix_not_dominates_infix_compare.ptest      |  2 +-
+|  test/test_parser.ml                               | 18 ++++++++++++
+|  50 files changed, 197 insertions(+), 78 deletions(-)
+| 
 * commit ec9770c53649fa2db66b6fe1cc0a833c07abe100
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sat Jun 18 12:14:12 2022 -0500
