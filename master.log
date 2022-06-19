@@ -1,3 +1,31 @@
+* commit 325913d70fdb8a2703b3fb6d877db57b48efaa37
+| Author: awsmith <aws@awsmith.us>
+| Date:   Sun Jun 19 15:15:44 2022 -0500
+| 
+|     [syntax] Remove special-case precedence for operator ~in
+|     
+|     This operator was a holdover from the syntax design before arbitrary
+|     infix expressions were permitted.  There is no reason for the operator
+|     ~in alone to be parsed as a Compare_op, as the boolean operators with
+|     which it will be used still have a higher precedence than that of all
+|     other tilde-prefixed infix expressions.
+|     
+|     This change technically forbids the presence of an infix operator ~in
+|     since "in" is lexed as a keyword rather than an identifier: allowing
+|     keywords to be used as identifiers in some contexts could loosen this
+|     restriction.  Other alternatives include a sigil (backticks, e.g. `in`?)
+|     to allow a keyword to be used as an identifier, or reversing the
+|     argument order of such operators and using a different name, e.g.
+|     "collection ~has element", or the Haskell "collection ~elem element".
+|     The use of dot syntax could also obliviate the need for such an operator
+|     entirely: "collection.has element".  There are many options, none of
+|     which necessitate special-case parsing for a single operator.
+| 
+|  src/syntax/lexer.ml       | 10 +++-------
+|  src/syntax/parser_base.ml |  2 +-
+|  test/test_lexer.ml        |  1 -
+|  3 files changed, 4 insertions(+), 9 deletions(-)
+| 
 * commit 4b910a98384746b96fa26f7e3554a495e68f80b4
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sat Jun 18 13:24:46 2022 -0500
