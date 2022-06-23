@@ -1,3 +1,38 @@
+* commit 08895f3eba87873322a922ed8d1034f9391cfa9c
+| Author: awsmith <aws@awsmith.us>
+| Date:   Thu Jun 23 16:44:27 2022 -0500
+| 
+|     [syntax] Fix precedence of discard statements
+|     
+|     Discard statements should have a higher precedence than infix operators,
+|     as they are dispatched directly from Expr.parse_top.
+| 
+|  src/syntax/parser.ml                           | 14 ++++++--------
+|  test/parser_data/discard_dominates_infix.ptest |  5 +++++
+|  test/test_parser.ml                            |  1 +
+|  3 files changed, 12 insertions(+), 8 deletions(-)
+| 
+* commit 220b3e4adbae4aa9ae5aa0d0ef729d49de88ed7b
+| Author: awsmith <aws@awsmith.us>
+| Date:   Tue Jun 21 14:15:07 2022 -0500
+| 
+|     [syntax] Restore parsing of discard expressions
+|     
+|     Reïmplemented the parsing of discard expressions using the new abstract
+|     parsing framework.  Implementing the remainder of the language's syntax
+|     may necessitate the addition of a few more "overridable parser hierarchy
+|     control" functions, although their use should be similarly minimal to
+|     the implementation of Parser.Expr.parse_top.
+| 
+|  src/prelude/reporting.ml                    |  1 +
+|  src/prelude/reporting_intf.ml               |  3 ++-
+|  src/syntax/cst.ml                           |  9 ++++++---
+|  src/syntax/parser.ml                        | 29 ++++++++++++++++++++++++++-
+|  src/syntax/parser_base.ml                   | 13 +++++++-----
+|  test/parser_data/discard_missing_expr.ptest |  2 +-
+|  test/test_parser.ml                         |  2 +-
+|  7 files changed, 47 insertions(+), 12 deletions(-)
+| 
 * commit 325913d70fdb8a2703b3fb6d877db57b48efaa37
 | Author: awsmith <aws@awsmith.us>
 | Date:   Sun Jun 19 15:15:44 2022 -0500
