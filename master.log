@@ -1,3 +1,31 @@
+* commit fe52252b9c9d56f5513d5b0aacd274a3aded85e0
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Jun 27 23:50:29 2022 -0500
+| 
+|     [syntax] Move expression CST types into module Cst.Expr
+|     
+|     Moved type *Cst.expr into module Cst.Expr as type Cst.Expr.t, along with
+|     its associated types and functions.  This refactor is in anticipation of
+|     the addition of type expression parsing to enable type ascriptions and
+|     pattern parsing.
+| 
+|  src/syntax/cst.ml                                 | 226 ++++++++++----------
+|  src/syntax/parser.ml                              |  53 ++---
+|  src/syntax/parser.mli                             |   4 +-
+|  src/syntax/parser_base.ml                         |   2 +-
+|  test/parser_data/discard_missing_expr.ptest       |   2 +-
+|  .../parser_data/funcall_label_missing_value.ptest |   2 +-
+|  .../funcall_label_missing_value_2.ptest           |   4 +-
+|  test/parser_data/infix_missing_rhs.ptest          |   2 +-
+|  test/parser_data/infix_missing_rhs_2.ptest        |   2 +-
+|  .../infix_prefixed_missing_operator.ptest         |   4 +-
+|  test/parser_data/infix_prefixed_missing_rhs.ptest |   2 +-
+|  test/parser_data/prefix_missing_rhs.ptest         |   2 +-
+|  test/parser_data/prefix_missing_rhs_2.ptest       |   2 +-
+|  test/parser_data/tuple_missing_rhs.ptest          |   4 +-
+|  test/test_parser.ml                               |   2 +-
+|  15 files changed, 159 insertions(+), 154 deletions(-)
+| 
 * commit 08895f3eba87873322a922ed8d1034f9391cfa9c
 | Author: awsmith <aws@awsmith.us>
 | Date:   Thu Jun 23 16:44:27 2022 -0500
