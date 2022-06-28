@@ -1,3 +1,29 @@
+* commit ec68f64ce0352f552e140aef082b58f445e841c9
+| Author: awsmith <aws@awsmith.us>
+| Date:   Tue Jun 28 01:07:22 2022 -0500
+| 
+|     [syntax] Implemented basic type expression parsing
+|     
+|     Implemented a wrapper of the common parsing facilities for type
+|     expressions.  In general, the grammar of type expressions will be much
+|     simpler than that of patterns or expressions, as expression-level
+|     features such as labelled arguments and user-defined operators are not
+|     supported in the type grammar.  This state of affairs may change at some
+|     point in the future, but I'm quite far off from having implemented the
+|     type-checking functionality required to support such constructs (...or
+|     any type-checker at all).
+| 
+|  src/syntax/cst.ml                                | 23 ++++++++++++
+|  src/syntax/parser.ml                             | 43 +++++++++++++++++++++-
+|  src/syntax/parser.mli                            |  8 +++-
+|  test/parser_data/type_constructor_multiple.ptest |  6 +++
+|  test/parser_data/type_constructor_single.ptest   |  4 ++
+|  test/parser_data/type_module_multiple.ptest      |  7 ++++
+|  test/parser_data/type_module_single.ptest        |  3 ++
+|  test/parser_data/type_single_identifier.ptest    |  3 ++
+|  test/test_parser.ml                              | 17 ++++++++-
+|  9 files changed, 110 insertions(+), 4 deletions(-)
+| 
 * commit fe52252b9c9d56f5513d5b0aacd274a3aded85e0
 | Author: awsmith <aws@awsmith.us>
 | Date:   Mon Jun 27 23:50:29 2022 -0500
