@@ -1,3 +1,14 @@
+* commit be385c5748d5ec3f7018dc7ec451e8bd251f3e3c
+| Author: awsmith <aws@awsmith.us>
+| Date:   Mon Jul 4 13:48:49 2022 -0500
+| 
+|     [test] Add test for parenthesised type atoms
+| 
+|  src/syntax/lexgen.ml                      | 8 ++++----
+|  test/parser_data/type_parenthesised.ptest | 3 +++
+|  test/test_parser.ml                       | 5 +++--
+|  3 files changed, 10 insertions(+), 6 deletions(-)
+| 
 * commit ec68f64ce0352f552e140aef082b58f445e841c9
 | Author: awsmith <aws@awsmith.us>
 | Date:   Tue Jun 28 01:07:22 2022 -0500
